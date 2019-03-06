@@ -19,7 +19,7 @@
             android:textSize="20sp" android:layout_centerHorizontal="true" android:textAlignment="viewStart"/>
     <Button
             android:text="Main1"
-            android:layout_width="157dp"
+            android:layout_width="164dp"
             android:layout_height="wrap_content" tools:layout_editor_absoluteY="67dp"
             tools:layout_editor_absoluteX="42dp" android:id="@+id/btn_main1"
             android:layout_alignParentBottom="true" android:layout_marginBottom="73dp"

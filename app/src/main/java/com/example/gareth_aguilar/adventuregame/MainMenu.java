@@ -14,6 +14,8 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         Button btn_start = findViewById(R.id.btn_start);
+        Button btn_load = findViewById(R.id.btn_load);
+        Button btn_quit = findViewById(R.id.btn_quit);
 
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -21,10 +23,22 @@ public class MainMenu extends AppCompatActivity {
                 openMainActivity();
             }
         });
+
+        btn_quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+
+        btn_load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 
     public void openMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, CreateCharacters.class);
         startActivity(intent);
     }
 }

@@ -9,8 +9,8 @@
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" tools:layout_editor_absoluteY="16dp"
-            tools:layout_editor_absoluteX="0dp">
+            android:layout_height="match_parent" tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="16dp">
 
         <TextView
                 android:text="Adventure Game"
@@ -23,7 +23,14 @@
                 android:layout_width="193dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_quit" android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true" android:layout_marginBottom="216dp"/>
+                android:layout_alignParentBottom="true" android:layout_marginBottom="145dp"/>
+        <Button
+                android:text="Load Game"
+                android:layout_width="193dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_load"
+                android:layout_centerHorizontal="true" android:layout_alignParentBottom="true"
+                android:layout_marginBottom="227dp"/>
         <Button
                 android:text="Begin"
                 android:layout_width="193dp"

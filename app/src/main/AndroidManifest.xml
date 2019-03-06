@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".MainMenu">
         </activity>
+        <activity android:name=".CreateCharacters">
+        </activity>
     </application>
 
 </manifest>
