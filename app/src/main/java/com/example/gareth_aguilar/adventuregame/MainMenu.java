@@ -20,7 +20,7 @@ public class MainMenu extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMainActivity();
+                openCharacterActivity();
             }
         });
 
@@ -37,7 +37,7 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
-    public void openMainActivity() {
+    public void openCharacterActivity() {
         Intent intent = new Intent(this, CreateCharacters.class);
         startActivity(intent);
     }
