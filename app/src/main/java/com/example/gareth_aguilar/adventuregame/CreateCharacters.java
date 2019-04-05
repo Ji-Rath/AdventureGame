@@ -7,10 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
 public class CreateCharacters extends AppCompatActivity {
 
     @Override
@@ -37,13 +33,13 @@ public class CreateCharacters extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String[] p = {txtinput_1.toString(),txtinput_2.toString(),txtinput_3.toString()};
-                txt.saveName(p);
+                //txt.saveName(p);
                 openMainActivity();
             }
         });
     }
     public void openMainActivity() {
-        Intent intent = new Intent(this, MainGame.class);
+        Intent intent = new Intent(this, Encounter.class);
         startActivity(intent);
     }
 }
