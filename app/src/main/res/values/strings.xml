@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AdventureGame</string>
+    <string name="btn_start">Begin</string>
 </resources>

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 public class CreateCharacters extends AppCompatActivity {
@@ -23,35 +24,26 @@ public class CreateCharacters extends AppCompatActivity {
         final EditText txtinput_2 = findViewById(R.id.txtinput_2);
         final EditText txtinput_3 = findViewById(R.id.txtinput_3);
         final EditText txtinput_4 = findViewById(R.id.txtinput_4);
+        final TextFileSave txt = new TextFileSave();
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenuActivity();
+                openMainActivity();
             }
         });
 
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FileWriter fw = new FileWriter("CharacterNames.txt");
-                PrintWriter pw = new PrintWriter(fw);
-                pw.println(txtinput_1.getText());
-                pw.println(txtinput_2.getText());
-                pw.println(txtinput_3.getText());
-                pw.println(txtinput_4.getText());
-
-                pw.close();
+                String[] p = {txtinput_1.toString(),txtinput_2.toString(),txtinput_3.toString()};
+                txt.saveName(p);
                 openMainActivity();
             }
         });
     }
-    public void openMenuActivity() {
-        Intent intent = new Intent(this, MainMenu.class);
-        startActivity(intent);
-    }
     public void openMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainGame.class);
         startActivity(intent);
     }
 }
