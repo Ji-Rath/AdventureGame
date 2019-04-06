@@ -1,6 +1,8 @@
 package com.example.gareth_aguilar.adventuregame;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private int hp, stamina, sanity;
     private String name;
     private boolean[] illness = new boolean[5];
@@ -23,9 +25,9 @@ public class Player {
         return name;
     }
 
-    public void damagePlayer(int d) {
+    public String damagePlayer(int d) {
         hp -= d;
-        System.out.print("(-"+d+" HP)");
+        return (getName()+": (-"+d+" HP)");
     }
 
     public void giveDisease(int d) {

@@ -1,6 +1,6 @@
 package com.example.gareth_aguilar.adventuregame;
 
-import java.util.Scanner;
+import java.io.Serializable;
 import java.util.Random;
 
 import android.support.v7.app.AppCompatActivity;
@@ -8,16 +8,15 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 
-public class AdventureGame extends AppCompatActivity {
+public class AdventureGame extends AppCompatActivity implements Serializable {
     private int day, month, year, season, food, money, medicine, progress;
     private Player[] players = new Player[3];
-    Scanner scan;
     Random rand;
-    TextFileSave txt;
-    public AdventureGame() {
-        scan = new Scanner(System.in);
+    //TextFileSave txt;
+
+    public AdventureGame(String[] p) {
         rand = new Random();
-        txt = new TextFileSave();
+        //txt = new TextFileSave();
         day = 0;
         month = 0;
         year = 1200;
@@ -26,15 +25,9 @@ public class AdventureGame extends AppCompatActivity {
         food = 50; //Out of 100
         progress = 0; //Out of 100;
         money = 10000; //yen (100 yen = about 1 dollar)
-        players[0] = new Player("Bob");
-        players[1] = new Player("Billy");
-        players[2] = new Player("Joe");
-    }
-
-    public void pickCharacter() {
-        System.out.println("Please enter 3 names");
-        String[] p = {scan.next(),scan.next(),scan.next()};
-        txt.saveName(p);
+        players[0] = new Player(p[0]);
+        players[1] = new Player(p[1]);
+        players[2] = new Player(p[2]);
     }
     public void addDay() {
         day ++;
@@ -57,14 +50,6 @@ public class AdventureGame extends AppCompatActivity {
             season = 3;
         }
     }
-    public boolean pause() {
-        System.out.println("Enter anything to continue....");
-        String s = "asdasd";
-        if (scan.next() == s) {
-            return true;
-        }
-        return false;
-    }
 
     public void randomMainEvent(int e){
         // 0 - Echigo, 1 - Shinano, 2 - Mino, 3 - Omu
@@ -82,7 +67,7 @@ public class AdventureGame extends AppCompatActivity {
     }
     public void menu() {
         String[] b = new String[3];
-
+        int temp = 0;
         System.out.println("What would you like to do today?\n");
         b[0] = "Continue";
         b[1] = "Set Up Camp";
@@ -91,7 +76,7 @@ public class AdventureGame extends AppCompatActivity {
             System.out.print("["+i+"]"+" "+b[i]+" | ");
         }
         System.out.println("\nCurrent Progress: "+progress+"/100");
-        switch(scan.nextInt()) {
+        switch(temp) {
             case 0:
                 //Main adventure
                 break;
@@ -114,11 +99,15 @@ public class AdventureGame extends AppCompatActivity {
         for(int i=0;i<players.length;i++) {
             System.out.println(players[i].toString()+"\n");
         }
-        pause();
         menu();
     }
-    public void addProgress(int p) {
+    public String addProgress(int p) {
         progress += p;
+        if(p>0) {
+            return ("(+" + p + " PROGRESS) ");
+        } else {
+            return ("(" + p + " PROGRESS) ");
+        }
     }
     public int getProgress() {
         return progress;
@@ -127,41 +116,25 @@ public class AdventureGame extends AppCompatActivity {
         return players[p];
     }
 
-    public void takeMoney(int m) {
+    public String takeMoney(int m) {
         money -= m;
-        System.out.print("(-"+m+" YEN)");
+        return ("(-"+m+" YEN) ");
     }
-    public void takeFood(int f) {
+    public String takeFood(int f) {
         food -= f;
-        System.out.print("(-"+f+" FOOD)");
+        return ("(-"+f+" FOOD) ");
     }
 
-    public void randomEvent(TextView txt_main, Button btn_1, Button btn_2) {
+    public int randomEvent(Button btn_left, Button btn_right, TextView txt_main) {
         int random = rand.nextInt(1);
         final int p = rand.nextInt(3);
         int choice = -1;
         switch(random) {
             case 0:
                 txt_main.setText("A group of poorly equipped theives block the way. They demand money and food to continue.");
-                btn_1.setText("Comply");
-                btn_2.setText("Run Away");
-                btn_2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        System.out.println("One of the thieves draw their knife, leading to an intense battle. "
-                                +players[p].getName()+" gets injured in the process");
-                        players[p].damagePlayer(30);
-                    }
-                });
-                btn_1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        System.out.println("The men accept the offering and allow you to pass.");
-                        takeFood(15);
-                        takeMoney(5000);
-                    }
-                });
-                System.out.println("Next Event!");
+                btn_left.setText("Comply");
+                btn_right.setText("Run Away");
+                break;
             case 1:
                 System.out.println(players[p].getName()+" was searching for food when he found some bright red berries.");
                 //choice = pick("Eat The Berries","Do Nothing");
@@ -178,5 +151,6 @@ public class AdventureGame extends AppCompatActivity {
                 break;
         }
         //pause();
+        return random;
     }
 }

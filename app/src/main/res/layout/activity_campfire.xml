@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/layout">
+    <Button
+            android:text="Travel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="67dp"
+            tools:layout_editor_absoluteX="42dp" android:id="@+id/btn_travel"
+            android:layout_alignParentBottom="true" android:layout_marginBottom="102dp"
+            android:layout_alignStart="@+id/txt_main" android:layout_marginLeft="0dp"/>
+    <Button
+            android:text="Rest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="67dp"
+            tools:layout_editor_absoluteX="42dp" android:id="@+id/btn_rest"
+            android:layout_alignParentBottom="true" android:layout_marginBottom="148dp"
+            android:layout_alignStart="@+id/txt_main"/>
+    <Button
+            android:text="Status"
+            android:layout_width="match_parent"
+            tools:layout_editor_absoluteY="67dp"
+            tools:layout_editor_absoluteX="42dp" android:id="@+id/btn_status"
+            android:layout_alignParentBottom="true" android:layout_marginBottom="54dp"
+            android:layout_alignStart="@+id/txt_main" android:layout_marginLeft="0dp"
+            android:layout_height="wrap_content"/>
+    <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:id="@+id/pb_main" android:progressTint="@color/colorAccent"
+            android:max="100" android:progress="0" android:indeterminate="false" android:layout_marginTop="0dp"
+            android:layout_alignParentTop="true"/>
+</RelativeLayout>

@@ -1,7 +1,7 @@
 package com.example.gareth_aguilar.adventuregame;
 
 import java.util.Scanner;
-
+/*
 public class AdventureGameRunner {
     public static void main(String[] args) {
         AdventureGame game = new AdventureGame();
@@ -28,3 +28,5 @@ public class AdventureGameRunner {
 
     }
 }
+
+ */

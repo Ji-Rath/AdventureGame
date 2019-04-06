@@ -11,8 +11,11 @@
             android:text="Quit"
             android:layout_width="193dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_quit" android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true" android:layout_marginBottom="145dp"/>
+            android:id="@+id/btn_quit"
+            android:layout_marginBottom="152dp"
+            android:layout_alignParentBottom="true" android:layout_marginStart="1dp"
+            android:layout_alignStart="@+id/btn_load" android:layout_marginEnd="-1dp"
+            android:layout_alignEnd="@+id/btn_load"/>
     <TextView
             android:text="By: Gareth Aguilar Version 1.0"
             android:layout_width="122dp"
@@ -24,8 +27,9 @@
             android:layout_width="193dp"
             android:layout_height="wrap_content"
             android:id="@+id/btn_load"
-            android:layout_centerHorizontal="true" android:layout_alignParentBottom="true"
-            android:layout_marginBottom="227dp"/>
+            android:layout_alignParentBottom="true" android:layout_marginBottom="224dp" android:layout_marginEnd="-1dp"
+            android:layout_alignEnd="@+id/btn_start" android:layout_marginStart="2dp"
+            android:layout_alignStart="@+id/btn_start"/>
     <TextView
             android:layout_width="289dp"
             android:layout_height="61dp" android:id="@+id/txt_title" android:layout_centerHorizontal="true"
@@ -34,7 +38,10 @@
     <Button
             android:layout_width="193dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_start" android:layout_alignParentTop="true"
-            android:layout_marginTop="385dp" android:text="@string/btn_start" android:layout_marginLeft="100dp"/>
+            android:id="@+id/btn_start"
+            android:text="@string/btn_start"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="114dp" android:layout_alignParentStart="true"
+            android:layout_marginStart="103dp" android:layout_alignParentBottom="true"
+            android:layout_marginBottom="296dp"/>
 
 </RelativeLayout>

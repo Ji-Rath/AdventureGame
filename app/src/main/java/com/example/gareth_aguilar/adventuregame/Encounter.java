@@ -7,32 +7,82 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class Encounter extends AppCompatActivity {
-    private TextView txt_1, txt_2;
+    private TextView txt_main, txt_details;
     private AdventureGame game;
+    private Button btn_left, btn_right, btn_return;
+    private int encounter = 0;
+    private Random rand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encounter);
 
-        Button btn_m1 = findViewById(R.id.btn_main1);
-        Button btn_m2 = findViewById(R.id.btn_main2);
-        txt_1 = findViewById(R.id.txt_main);
-        txt_2 = findViewById(R.id.txt_status);
-        game = new AdventureGame();
-        game.randomEvent(txt_1, btn_m1, btn_m2);
+        rand = new Random();
+        btn_left = findViewById(R.id.btn_main1);
+        btn_right = findViewById(R.id.btn_main2);
+        btn_return = findViewById(R.id.btn_return);
+        txt_main = findViewById(R.id.txt_main);
+        txt_details = findViewById(R.id.txt_details);
+
+        Intent intent = getIntent();
+        if(intent.getExtras() != null) {
+            game = (AdventureGame) intent.getSerializableExtra("Game");
+            encounter = game.randomEvent(btn_left, btn_right, txt_main);
+        }
+
+        btn_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str  = "";
+                switch(encounter) {
+                    case 0:
+                    int p = rand.nextInt(2);
+                    txt_main.setText("One of the thieves draw their knife, leading to an intense battle. "
+                            + game.getPlayer(p).getName() + " gets injured in the process");
+                    str += game.getPlayer(p).damagePlayer(30);
+                    str += game.addProgress(-5);
+                    break;
+                }
+                txt_details.setText(str);
+                btn_left.setVisibility(View.INVISIBLE);
+                btn_right.setVisibility(View.INVISIBLE);
+                btn_return.setVisibility(View.VISIBLE);
+            }
+        });
+        btn_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = "";
+                switch(encounter) {
+                    case 0:
+                    txt_main.setText("The men accept the offering and allow you to pass.");
+                    str += game.takeFood(15);
+                    str += game.takeMoney(5000);
+                    str += game.addProgress(10);
+                    break;
+                }
+                txt_details.setText(str);
+                btn_left.setVisibility(View.INVISIBLE);
+                btn_right.setVisibility(View.INVISIBLE);
+                btn_return.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btn_return.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCampActivity();
+            }
+        });
     }
 
-    public void openStatsActivity() {
-        Intent intent = new Intent(this, CreateCharacters.class);
+    public void openCampActivity() {
+        Intent intent = new Intent(this, Campfire.class);
+        intent.putExtra("Game", game);
         startActivity(intent);
-    }
-
-    public void setMainText(String str) {
-        txt_1.setText(str);
-    }
-    public void setStatusText(String str) {
-        txt_2.setText(str);
     }
 }

@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".CreateCharacters">
         </activity>
+        <activity android:name=".Campfire">
+        </activity>
     </application>
 
 </manifest>
