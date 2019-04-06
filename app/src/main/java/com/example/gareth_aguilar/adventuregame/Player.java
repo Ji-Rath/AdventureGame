@@ -27,7 +27,7 @@ public class Player implements Serializable {
 
     public String damagePlayer(int d) {
         hp -= d;
-        return (getName()+": (-"+d+" HP)");
+        return (getName()+": (-"+d+" HP) ");
     }
 
     public void giveDisease(int d) {
