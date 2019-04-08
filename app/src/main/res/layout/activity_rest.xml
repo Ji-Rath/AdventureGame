@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/layout">
+    <Button
+            android:text="Continue"
+            android:layout_width="match_parent"
+            tools:layout_editor_absoluteY="67dp"
+            tools:layout_editor_absoluteX="42dp" android:id="@+id/btn_rest_continue"
+            android:layout_alignParentBottom="true" android:layout_marginBottom="0dp"
+            android:layout_alignStart="@+id/txt_main" android:layout_marginLeft="0dp"
+            android:layout_height="wrap_content" style="@style/Widget.AppCompat.Button.Borderless"
+            android:textSize="18sp" android:textStyle="bold" android:fontFamily="monospace"/>
+    <TextView
+            android:text="Time/Location"
+            android:layout_width="match_parent"
+            android:layout_height="56dp" android:id="@+id/txt_time" android:layout_marginTop="325dp"
+            android:layout_alignParentTop="true" android:textAlignment="center" android:textSize="18sp"
+            android:fontFamily="sans-serif-smallcaps" android:textStyle="bold"/>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="306dp" app:srcCompat="@drawable/cave" android:id="@+id/imageView3"
+            android:scaleType="centerCrop" android:layout_marginTop="0dp" android:layout_alignParentTop="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="160dp" android:id="@+id/txt_rested" android:layout_marginTop="405dp"
+            android:layout_alignParentTop="true" android:text="Rested Text" android:textSize="18sp"
+            android:textAlignment="textStart" android:layout_alignParentStart="true" android:layout_marginStart="26dp"
+            android:layout_alignParentEnd="true" android:layout_marginEnd="25dp"/>
+</RelativeLayout>

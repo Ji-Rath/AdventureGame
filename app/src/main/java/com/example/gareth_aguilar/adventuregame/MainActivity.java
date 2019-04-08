@@ -38,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
         btn_load.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Not implemented yet!
+            }
+        });
+
+        btn_quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
             }
         });
     }

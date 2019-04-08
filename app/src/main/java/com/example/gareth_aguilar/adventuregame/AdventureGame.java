@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.Random;
 
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
 
 public class AdventureGame extends AppCompatActivity implements Serializable {
-    private int day, month, year, season, food, money, medicine, progress;
+    private int day, month, year, season, food, money, progress;
     private Player[] players = new Player[3];
     Random rand;
     //TextFileSave txt;
@@ -21,7 +21,6 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
         month = 0;
         year = 1200;
         season = 0;
-        medicine = 50; //Out of 100
         food = 50; //Out of 100
         progress = 0; //Out of 100;
         money = 10000; //yen (100 yen = about 1 dollar)
@@ -83,7 +82,6 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
 
             case 1:
                 //Setup camp
-                camp();
                 break;
 
             case 2:
@@ -92,9 +90,24 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
                 break;
         }
     }
-    public void camp() {
 
+    public int getPlayerCount() {
+        int count = 0;
+        for(int i=0;i<3;i++) {
+            if(players[i].isAvailable()) {
+                count++;
+            }
+        }
+        return count;
     }
+    public String getTime() {
+        return "D: "+day+" M: "+month+" Y: "+year;
+    }
+
+    public String getLocation() {
+        return "Forest";
+    }
+
     public void stats() {
         for(int i=0;i<players.length;i++) {
             System.out.println(players[i].toString()+"\n");
@@ -102,7 +115,11 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
         menu();
     }
     public String addProgress(int p) {
+        if(p==0) {
+            return "";
+        }
         progress += p;
+        addDay();
         if(p>0) {
             return ("(+" + p + " PROGRESS) ");
         } else {
@@ -115,42 +132,174 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
     public Player getPlayer(int p) {
         return players[p];
     }
-
-    public String takeMoney(int m) {
-        money -= m;
-        return ("(-"+m+" YEN) ");
+    public int getFood() {
+        return food;
     }
-    public String takeFood(int f) {
-        food -= f;
-        return ("(-"+f+" FOOD) ");
+    public int getMoney() {
+        return money;
     }
 
-    public int randomEvent(Button btn_left, Button btn_right, TextView txt_main) {
-        int random = rand.nextInt(1);
-        final int p = rand.nextInt(3);
-        int choice = -1;
+    public String addMoney(int m) {
+        money += m;
+        if(m>0) {
+            return ("(+" + m + " YEN) ");
+        } else {
+            return ("(" + m + " YEN) ");
+        }
+    }
+    public String addFood(int f) {
+        food += f;
+        if(f>0) {
+            return ("(+" + f + " FOOD) ");
+        } else {
+            return ("(" + f + " FOOD) ");
+        }
+    }
+
+    public int randomEvent(int p, Button btn_left, Button btn_right, TextView txt_main, ImageView img_main) {
+        int random = rand.nextInt(4);
         switch(random) {
             case 0:
-                txt_main.setText("A group of poorly equipped theives block the way. They demand money and food to continue.");
-                btn_left.setText("Comply");
-                btn_right.setText("Run Away");
+                txt_main.setText("A poorly equipped thief block the way. He demands money and food to pass.");
+                btn_left.setText("Handover the goods");
+                btn_right.setText("Ignore");
+                img_main.setImageResource(R.drawable.thief);
                 break;
             case 1:
-                System.out.println(players[p].getName()+" was searching for food when he found some bright red berries.");
-                //choice = pick("Eat The Berries","Do Nothing");
-                switch(choice) {
-                    case 0: //eat
-                        System.out.println(players[p].getName()+" eagerly takes a bite out of one of the berries");
-                        players[p].giveDisease(4);
-                        System.out.println("\n");
-                        break;
-                    case 1: //nothing
-                        System.out.println(players[p].getName()+" puts the berries down and carries on his merry way.");
-                        break;
-                }
+                txt_main.setText(players[p].getName()+" was scavenging for food when he found some bright red berries hanging from a bush.");
+                btn_left.setText("Eat the berries");
+                btn_right.setText("Run Away");
+                img_main.setImageResource(R.drawable.bush);
+                break;
+            case 2:
+                txt_main.setText(players[p].getName()+" encounters a group of highly trained ninjas, they look intimidating");
+                btn_left.setText("Fight the ninjas");
+                btn_right.setText("Show off six-pack abs");
+                img_main.setImageResource(R.drawable.sneak);
+                break;
+            case 3:
+                txt_main.setText(players[p].getName()+" stumbles upon a wild dog, it appears to be friendly");
+                btn_left.setText("Pet the Dog");
+                btn_right.setText("Run");
+                img_main.setImageResource(R.drawable.doggo);
+                break;
+            case 4:
+                txt_main.setText("A passing priest wishes to give you his blessing");
+                btn_left.setText("Accept blessing");
+                btn_right.setText("Reject blessing");
+                img_main.setImageResource(R.drawable.priest);
                 break;
         }
-        //pause();
         return random;
+    }
+    public void minorRandomEvent(int p,int p2, TextView txt_minorevent, TextView txt_details) {
+        String str = "";
+        switch(rand.nextInt(15)) {
+            case 0:
+                txt_minorevent.setText(players[p].getName()+" trips on a rock and cuts his leg");
+                str += players[p].addHp(-10);
+                break;
+            case 1:
+                txt_minorevent.setText(players[p].getName()+" and "+players[p2].getName()+" run into each other and fall to the ground");
+                str += players[p].addHp(-5);
+                str += players[p2].addHp(-5);
+                break;
+            case 2:
+                txt_minorevent.setText(players[p].getName()+" does a little tap dance");
+                str += players[p].addSanity(5);
+                str += addProgress(5);
+                break;
+            case 3:
+                txt_minorevent.setText(players[p].getName()+" accidentally falls off a cliff");
+                str += players[p].addHp(-80);
+                break;
+            case 4:
+                txt_minorevent.setText(players[p].getName()+" soils their pants");
+                str += players[p].addSanity(-15);
+                break;
+            case 5:
+                txt_minorevent.setText(players[p].getName()+" forgot to breathe and passed out");
+                str += addProgress(-5);
+                str += players[p].addHp(-20);
+                break;
+            case 6:
+                txt_minorevent.setText(players[p].getName()+" sneezes on "+players[p2].getName());
+                str += players[p].giveDisease(3);
+                break;
+            case 7:
+                txt_minorevent.setText(players[p].getName()+" finds some spare change on the ground");
+                str += addMoney(100);
+                str += addProgress(5);
+                break;
+            case 8:
+                txt_minorevent.setText(players[p].getName()+" contemplates the meaning of life");
+                str += players[p].addSanity(5);
+                str += addProgress(5);
+                break;
+            case 9:
+                txt_minorevent.setText(players[p].getName()+" sniffs the nearby roses. Their face begins to swell up.");
+                str += players[p].giveDisease(3);
+                break;
+            case 10:
+                txt_minorevent.setText(players[p].getName()+" lets out a loud fart and attracts a wild bear");
+                str += players[p].addHp(-70);
+                break;
+            case 11:
+                txt_minorevent.setText(players[p].getName()+" decides to take a nap.");
+                str += addProgress(-5);
+                break;
+            case 12:
+                txt_minorevent.setText(players[p].getName()+" picks his nose intensely");
+                str += addProgress(3);
+                break;
+            case 13:
+                txt_minorevent.setText(players[p].getName()+" chokes on a passing mosquito");
+                str += players[p].addHp(-5);
+                break;
+            case 14:
+                txt_minorevent.setText("A strange beam radiates from the heavens and lifts "+players[p].getName()+" into the sky");
+                str += players[p].setMia(2);
+                players[p].makeAlien();
+                break;
+            case 15:
+                txt_minorevent.setText(players[p].getName()+" took a wrong path ang got lost");
+                str += players[p].setMia(5);
+                break;
+            case 16:
+                txt_minorevent.setText(players[p].getName()+" got bored and left");
+                str += players[p].setMia(1);
+                str += addProgress(5);
+                break;
+
+        }
+        str += checkSanity()+checkHealth();
+
+        txt_details.setText(str);
+    }
+
+    public String checkSanity() {
+        int count = 0;
+        for(int i = 0;i<3;i++) {
+            if(getPlayer(i).getSanity()<90 && getPlayer(i).isAvailable()) {
+                count++;
+            }
+        }
+        if(count != 0) {
+            return "\n" + addProgress(-count) + " DUE TO INSANITY";
+        }
+        return "";
+    }
+
+    public String checkHealth() {
+        String str = "\n";
+        for(int i = 0;i<3;i++) {
+            if(getPlayer(i).hasDisease() && getPlayer(i).isAvailable()) {
+                str += getPlayer(i).addHp(-5);
+            }
+        }
+        if(!str.equals("\n")) {
+            str += " DUE TO ILLNESS ";
+        }
+        return str;
     }
 }

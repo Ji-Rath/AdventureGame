@@ -22,6 +22,12 @@
         </activity>
         <activity android:name=".Campfire">
         </activity>
+        <activity android:name=".PlayerStatus">
+        </activity>
+        <activity android:name=".Traveling">
+        </activity>
+        <activity android:name=".Rest">
+        </activity>
     </application>
 
 </manifest>
