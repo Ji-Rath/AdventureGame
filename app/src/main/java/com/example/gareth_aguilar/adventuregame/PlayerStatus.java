@@ -13,6 +13,7 @@ public class PlayerStatus extends AppCompatActivity {
     private Button btn_return;
     private TextView txt_p1, txt_p2, txt_p3, txt_resources;
     private TextView[] playerText;
+    private int playerInjured[];
     private AdventureGame game;
     private ImageView imgPortriat[];
 
@@ -25,15 +26,19 @@ public class PlayerStatus extends AppCompatActivity {
         game = (AdventureGame) intent.getSerializableExtra("Game");
         playerText = new TextView[3];
         imgPortriat = new ImageView[3];
+        playerInjured = new int[3];
 
         btn_return = findViewById(R.id.btn_return);
-        txt_p1 = findViewById(R.id.txt_player);
-        txt_p2 = findViewById(R.id.txt_player1);
-        txt_p3 = findViewById(R.id.txt_player2);
+        txt_p1 = findViewById(R.id.txt_player1);
+        txt_p2 = findViewById(R.id.txt_player2);
+        txt_p3 = findViewById(R.id.txt_player3);
         txt_resources = findViewById(R.id.txt_resources);
-        imgPortriat[0] = findViewById(R.id.img_player);
-        imgPortriat[1] = findViewById(R.id.img_player1);
-        imgPortriat[2] = findViewById(R.id.img_player2);
+        imgPortriat[0] = findViewById(R.id.img_player1);
+        imgPortriat[1] = findViewById(R.id.img_player2);
+        imgPortriat[2] = findViewById(R.id.img_player3);
+        playerInjured[0] = R.drawable.player1hurt;
+        playerInjured[1] = R.drawable.player2hurt;
+        playerInjured[2] = R.drawable.player3hurt;
 
         playerText[0] = txt_p1;
         playerText[1] = txt_p2;
@@ -41,6 +46,10 @@ public class PlayerStatus extends AppCompatActivity {
 
         for(int i=0;i<playerText.length;i++) {
             playerText[i].setText(game.getPlayer(i).toString());
+            if(game.getPlayer(i).hasDisease() || game.getPlayer(i).getHp() < 50) {
+                imgPortriat[i].setImageResource(playerInjured[i]);
+            }
+
             if (game.getPlayer(i).isAlien()) {
                 imgPortriat[i].setImageResource(R.drawable.alien);
             }

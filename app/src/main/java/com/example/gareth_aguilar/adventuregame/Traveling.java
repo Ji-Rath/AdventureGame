@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -53,7 +54,6 @@ public class Traveling extends AppCompatActivity {
         img_travel_p1.setBackgroundResource(R.drawable.player1animation);
         anim1 = (AnimationDrawable) img_travel_p1.getBackground();
 
-
         img_travel_p2.setBackgroundResource(R.drawable.player2animation);
         anim2 = (AnimationDrawable) img_travel_p2.getBackground();
 
@@ -94,27 +94,35 @@ public class Traveling extends AppCompatActivity {
         btn_restup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCampfireActivity();
+                if(game.getProgress() >= 100 || game.getPlayerCount() == 0) {
+                    openFinishActivity();
+                } else {
+                    openCampfireActivity();
+                }
             }
         });
 
         btn_travel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_restup.setVisibility(View.INVISIBLE);
-                btn_travel.setVisibility(View.INVISIBLE);
-                pb_travel.setVisibility(View.VISIBLE);
-                txt_details.setText("");
-                txt_minorevent.setText("");
-                task = new TimerTask() {
-                    public void run() {
-                        finishedWalking();
-                    }
-                };
-                timer.schedule(task, delay);
-                anim1.start();
-                anim2.start();
-                anim3.start();
+                if(game.getProgress() >= 100 || game.getPlayerCount() == 0) {
+                    openFinishActivity();
+                } else {
+                    btn_restup.setVisibility(View.INVISIBLE);
+                    btn_travel.setVisibility(View.INVISIBLE);
+                    pb_travel.setVisibility(View.VISIBLE);
+                    txt_details.setText("");
+                    txt_minorevent.setText("");
+                    task = new TimerTask() {
+                        public void run() {
+                            finishedWalking();
+                        }
+                    };
+                    timer.schedule(task, delay);
+                    anim1.start();
+                    anim2.start();
+                    anim3.start();
+                }
             }
         });
 
@@ -132,12 +140,18 @@ public class Traveling extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openFinishActivity() {
+        Intent intent = new Intent(this, Finish.class);
+        intent.putExtra("Game", game);
+        startActivity(intent);
+    }
+
     public void finishedWalking() {
         runOnUiThread(new Runnable() {
             public void run() {
                 for(int i=0;i<3;i++) {
                     String str = game.getPlayer(i).subtractTimer();
-                    game.getPlayer(i).addSanity(-10);
+                    game.getPlayer(i).addSanity(-7);
                     str += game.getPlayer(i).removeRandomIllness();
                     txt_details.setText(str);
                     btn_restup.setVisibility(View.VISIBLE);
@@ -151,7 +165,9 @@ public class Traveling extends AppCompatActivity {
                     }
                 }
                 if(txt_details.getText().toString().equals("")) {
-                    switch (rand.nextInt(3)) {
+                    int r = rand.nextInt(3);
+                    System.out.println(r);
+                    switch (r) {
                         case 0:
                             btn_restup.setVisibility(View.VISIBLE);
                             btn_travel.setVisibility(View.VISIBLE);
@@ -169,14 +185,14 @@ public class Traveling extends AppCompatActivity {
                             btn_restup.setVisibility(View.VISIBLE);
                             btn_travel.setVisibility(View.VISIBLE);
                             pb_travel.setVisibility(View.INVISIBLE);
-                            p = rand.nextInt(2);
+                            p = rand.nextInt(3);
                             while (!game.getPlayer(p).isAvailable()) {
-                                p = rand.nextInt(2);
+                                p = rand.nextInt(3);
                             }
-                            p2 = rand.nextInt(2);
+                            p2 = rand.nextInt(3);
                             if (game.getPlayerCount()>1 && !game.getPlayer(p2).isAvailable()) {
                                 while (!game.getPlayer(p2).isAvailable()) {
-                                    p2 = rand.nextInt(2);
+                                    p2 = rand.nextInt(3);
                                 }
                             } else {
                                 p2 = p;
@@ -191,12 +207,21 @@ public class Traveling extends AppCompatActivity {
                 }
                 if(!game.getPlayer(0).isAvailable()) {
                     img_travel_p1.setVisibility(View.INVISIBLE);
+                } else {
+                    img_travel_p1.setVisibility(View.VISIBLE);
                 }
                 if(!game.getPlayer(1).isAvailable()) {
                     img_travel_p2.setVisibility(View.INVISIBLE);
+                } else {
+                    img_travel_p2.setVisibility(View.VISIBLE);
                 }
                 if(!game.getPlayer(2).isAvailable()) {
                     img_travel_p3.setVisibility(View.INVISIBLE);
+                } else {
+                    img_travel_p3.setVisibility(View.VISIBLE);
+                }
+                if(game.getProgress() >= 100 || game.getPlayerCount() == 0) {
+                    openFinishActivity();
                 }
             }
         });

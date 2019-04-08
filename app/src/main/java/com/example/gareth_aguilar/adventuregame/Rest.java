@@ -36,7 +36,8 @@ public class Rest extends AppCompatActivity {
 
         game.addDay();
         for(int i=0;i<3;i++) {
-            game.getPlayer(i).addSanity(40);
+            game.getPlayer(i).addSanity(50);
+            game.getPlayer(i).addHp(15);
         }
 
         switch(rand.nextInt(6)) {

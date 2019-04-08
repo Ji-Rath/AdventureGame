@@ -102,6 +102,9 @@ public class Player implements Serializable {
     }
     public String addSanity(int d) {
         sanity += d;
+        if(sanity>100) {
+            sanity = 100;
+        }
         if (d > 0) {
             return (getName() + ": (+" + d + " SANITY) ");
         } else {

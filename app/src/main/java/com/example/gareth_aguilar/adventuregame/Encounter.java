@@ -35,9 +35,9 @@ public class Encounter extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent.getExtras() != null) {
             game = (AdventureGame) intent.getSerializableExtra("Game");
-            p = rand.nextInt(2);
+            p = rand.nextInt(3);
             while (!game.getPlayer(p).isAvailable()) {
-                p = rand.nextInt(2);
+                p = rand.nextInt(3);
             }
             encounter = game.randomEvent(p, btn_left, btn_right, txt_main, img_main);
         }
@@ -48,7 +48,7 @@ public class Encounter extends AppCompatActivity {
                 String str  = "";
                 switch(encounter) {
                     case 0:
-                        txt_main.setText("One of the thieves draw their knife, "+game.getPlayer(p).getName()+"battles it out with his fists.");
+                        txt_main.setText("One of the thieves draw their knife, "+game.getPlayer(p).getName()+" battles it out with his fists.");
                         str += game.getPlayer(p).addHp(-30);
                         str += game.addProgress(-5);
                     break;

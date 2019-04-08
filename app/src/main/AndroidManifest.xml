@@ -9,24 +9,34 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:configChanges="orientation"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Encounter">
+        <activity android:name=".Encounter" android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".CreateCharacters">
+        <activity android:name=".CreateCharacters" android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Campfire">
+        <activity android:name=".Campfire" android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".PlayerStatus">
+        <activity android:name=".PlayerStatus" android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Traveling">
+        <activity android:name=".Traveling" android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Rest">
+        <activity android:name=".Rest" android:configChanges="orientation"
+                  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Finish" android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 

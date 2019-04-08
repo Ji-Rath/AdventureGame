@@ -119,6 +119,9 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
             return "";
         }
         progress += p;
+        if(progress <0) {
+            progress = 0;
+        }
         addDay();
         if(p>0) {
             return ("(+" + p + " PROGRESS) ");
@@ -237,7 +240,7 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
                 str += addProgress(5);
                 break;
             case 9:
-                txt_minorevent.setText(players[p].getName()+" sniffs the nearby roses. Their face begins to swell up.");
+                txt_minorevent.setText(players[p].getName()+" sniffs some nearby roses. Their face begins to swell up.");
                 str += players[p].giveDisease(3);
                 break;
             case 10:
@@ -270,7 +273,14 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
                 str += players[p].setMia(1);
                 str += addProgress(5);
                 break;
-
+            case 17:
+                txt_minorevent.setText(players[p].getName()+" runs through a thorn bush");
+                str += players[p].addHp(-10);
+                break;
+            case 18:
+                txt_minorevent.setText(players[p].getName()+" saw "+players[p2].getName()+" pick his nose");
+                str += players[p2].addSanity(-20);
+                break;
         }
         str += checkSanity()+checkHealth();
 
@@ -280,7 +290,7 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
     public String checkSanity() {
         int count = 0;
         for(int i = 0;i<3;i++) {
-            if(getPlayer(i).getSanity()<90 && getPlayer(i).isAvailable()) {
+            if(getPlayer(i).getSanity()<60 && getPlayer(i).isAvailable()) {
                 count++;
             }
         }

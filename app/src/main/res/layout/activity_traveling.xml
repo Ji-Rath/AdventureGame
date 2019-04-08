@@ -14,8 +14,7 @@
             tools:layout_editor_absoluteX="42dp" android:id="@+id/btn_travel"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginStart="39dp" android:visibility="invisible" android:layout_marginEnd="19dp"
-            android:layout_toEndOf="@+id/btn_restup"
+            android:visibility="invisible" android:layout_marginEnd="19dp"
             android:layout_alignBottom="@+id/btn_restup" android:layout_alignParentEnd="true" android:textSize="18sp"
             android:fontFamily="monospace" android:textStyle="bold" style="@style/Widget.AppCompat.Button.Borderless"/>
     <Button
@@ -51,30 +50,6 @@
             android:layout_alignTop="@+id/pb_travel" android:layout_marginTop="8dp"
             android:layout_above="@+id/btn_restup" android:layout_marginBottom="-8dp"
             android:fontFamily="sans-serif-smallcaps"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="114dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="108dp"
-            android:id="@+id/img_travel_p1" android:contentDescription="Main Background"
-            android:layout_alignParentStart="true" android:layout_marginStart="239dp"
-            android:layout_alignParentEnd="true" android:layout_marginEnd="101dp"
-    />
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="114dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="74dp"
-            android:id="@+id/img_travel_p3" android:contentDescription="Main Background"
-            android:layout_alignParentStart="true" android:layout_marginStart="184dp"
-            android:layout_alignParentEnd="true" android:layout_marginEnd="155dp"
-    />
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="104dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="85dp"
-            android:id="@+id/img_travel_p2" android:contentDescription="Main Background"
-            android:layout_alignParentStart="true" android:layout_marginStart="296dp"
-            android:layout_alignParentEnd="true" android:layout_marginEnd="51dp"
-    />
     <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="116dp"
@@ -86,5 +61,34 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:id="@+id/pb_travelbar" android:layout_alignParentBottom="true" android:layout_marginBottom="13dp"/>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="262dp" android:layout_marginTop="0dp" android:layout_alignParentTop="true">
+
+        <ImageView
+                android:layout_width="70dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="85dp"
+                android:id="@+id/img_travel_p2" android:contentDescription="Main Background"
+                android:layout_marginStart="296dp"
+                android:layout_marginEnd="51dp"
+                android:scaleType="center" android:background="@drawable/player1_walk1"/>
+        <ImageView
+                android:layout_width="81dp"
+                android:layout_height="133dp"
+                android:layout_marginTop="74dp"
+                android:id="@+id/img_travel_p3" android:contentDescription="Main Background"
+                android:layout_marginStart="184dp"
+                android:layout_marginEnd="155dp"
+                android:scaleType="fitCenter" android:background="@drawable/player3animation"/>
+        <ImageView
+                android:layout_width="79dp"
+                android:layout_height="133dp"
+                android:layout_marginTop="108dp"
+                android:id="@+id/img_travel_p1" android:contentDescription="Main Background"
+                android:layout_marginStart="239dp"
+                android:layout_marginEnd="101dp"
+                android:scaleType="fitCenter" android:background="@drawable/player2animation"/>
+    </FrameLayout>
 
 </RelativeLayout>

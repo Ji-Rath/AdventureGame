@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreateCharacters">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" tools:layout_editor_absoluteY="32dp"
+            tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+                android:text="Time/Location"
+                android:layout_width="match_parent"
+                android:layout_height="39dp" android:id="@+id/txt_time2" android:layout_marginTop="350dp"
+                android:layout_alignParentTop="true" android:textAlignment="center" android:textSize="18sp"
+                android:fontFamily="sans-serif-smallcaps" android:textStyle="bold"/>
+        <Button
+                android:text="Continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+                android:layout_marginBottom="39dp"
+                android:id="@+id/btn_finish_continue"
+                style="@style/Widget.AppCompat.Button.Borderless" android:textSize="18sp"
+                android:fontFamily="monospace" android:textStyle="bold"/>
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="308dp"
+                android:layout_alignParentTop="true" android:layout_marginTop="31dp"
+                android:id="@+id/img_finish"
+                android:layout_alignParentStart="true" android:layout_marginStart="0dp"
+                android:layout_above="@+id/txtinput_1" android:layout_marginBottom="35dp"
+                app:srcCompat="@drawable/trees" android:scaleType="centerCrop"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="122dp" android:id="@+id/txt_finish"
+                android:layout_alignParentBottom="true" android:layout_marginBottom="220dp"
+                android:fontFamily="sans-serif-smallcaps" android:textSize="18sp"/>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

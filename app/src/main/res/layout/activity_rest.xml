@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             tools:layout_editor_absoluteY="67dp"
             tools:layout_editor_absoluteX="42dp" android:id="@+id/btn_rest_continue"
-            android:layout_alignParentBottom="true" android:layout_marginBottom="0dp"
+            android:layout_alignParentBottom="true" android:layout_marginBottom="30dp"
             android:layout_alignStart="@+id/txt_main" android:layout_marginLeft="0dp"
             android:layout_height="wrap_content" style="@style/Widget.AppCompat.Button.Borderless"
             android:textSize="18sp" android:textStyle="bold" android:fontFamily="monospace"/>
