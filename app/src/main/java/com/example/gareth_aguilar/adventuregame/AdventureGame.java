@@ -17,8 +17,8 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
     public AdventureGame(String[] p) {
         rand = new Random();
         //txt = new TextFileSave();
-        day = 0;
-        month = 0;
+        day = 1;
+        month = 1;
         year = 1200;
         season = 0;
         food = 50; //Out of 100
@@ -31,11 +31,11 @@ public class AdventureGame extends AppCompatActivity implements Serializable {
     public void addDay() {
         day ++;
         if (day > 30) {
-            day = 0;
+            day = 1;
             month ++;
         }
         if (month > 11) {
-            month = 0;
+            month = 1;
             year ++;
             season = 0;
         }
